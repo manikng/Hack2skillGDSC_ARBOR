@@ -1,0 +1,196 @@
+// function CreatePostCard({ onNewPost }: { onNewPost: (newPost: Post) => void }) {
+//   const [previewImage, setPreviewImage] = useState<string>("");
+//   const [productDescription, setProductDescription] = useState<string>("");
+//   const [productName, setProductName] = useState<string>("");
+//   const [tags, setTags] = useState<string>("");
+//   const [price, setPrice] = useState<number | string>("");
+//   const [Image,setImage] = useState<File | null>(null);
+
+//   const actionData = useActionData<{ success: boolean; message: string; newPost?: Post }>();
+
+//   useEffect(() => {
+//     if (actionData?.success && actionData.newPost) {
+//       onNewPost(actionData.newPost);
+//       resetForm();
+//     }
+//   }, [actionData]);
+
+//   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const file = e.target.files?.[0];
+//     if (file) {
+//       setPreviewImage(URL.createObjectURL(file));
+//       setImage(file);
+//     }
+//   };
+
+
+//   const resetForm = () => {
+//     setPreviewImage("");
+//     setProductDescription("");
+//     setProductName("");
+//     setTags("");
+//     setPrice("");
+//     (document.getElementById("image-upload") as HTMLInputElement).value = "";
+//   };
+
+//   return (
+//     <Form
+//       method="post"
+//       encType="multipart/form-data"
+//       className="mb-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-orange-200"
+//     >
+//             <div className="p-6">
+//         {/* Success/Error Messages */}
+//         {actionData?.message && (
+//           <div
+//             className={`mb-6 p-4 rounded-lg flex items-center gap-3 ${
+//               actionData.success
+//                 ? "bg-green-100 text-green-800"
+//                 : "bg-red-100 text-red-800"
+//             }`}
+//           >
+//             <CheckCircleIcon className="w-5 h-5" />
+//             <span>{actionData.message}</span>
+//           </div>
+//         )}
+
+//         {/* Author Section */}
+//         <div className="flex items-center gap-4 mb-6 p-4 bg-purple-50 rounded-xl">
+//           <img
+//             // src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+//             src={avturlapi}
+//             className="w-14 h-14 rounded-full border-2 border-purple-200"
+//             alt="User"
+//           />
+//           <textarea
+//             name="Product-Description"
+//             placeholder="Share your creation with the community..."
+//             className="flex-1 p-3 text-lg bg-transparent focus:outline-none placeholder-gray-400 resize-none"
+//             rows={2}
+//             onChange={(e) => setProductDescription(e.target.value)}
+//             value={productDescription}
+//           />
+//         </div>
+
+//         {/* Form Grid */}
+//         <div className="space-y-4 mb-6">
+//           <div className="relative">
+//             <input
+//               type="text"
+//               name="Product-Name"
+//               placeholder=" "
+//               className="w-full p-4 pt-6 bg-gray-50 rounded-lg border border-gray-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-100 peer"
+//               onChange={(e) => setProductName(e.target.value)}
+//               value={productName}
+//             />
+//             <label className="absolute top-2 left-4 text-sm text-gray-500 pointer-events-none transition-all peer-focus:text-purple-600">
+//               Product Name
+//             </label>
+//           </div>
+
+//           <div className="grid grid-cols-2 gap-4">
+//             <div className="relative">
+//               <input
+//                 type="number"
+//                 name="Price"
+//                 placeholder=" "
+//                 className="w-full p-4 pt-6 bg-gray-50 rounded-lg border border-gray-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-100 peer"
+//                 step="0.01"
+//                 onChange={(e) => setPrice(e.target.value)}
+//                 value={price}
+//               />
+//               <label className="absolute top-2 left-4 text-sm text-gray-500 pointer-events-none transition-all peer-focus:text-purple-600">
+//                 Price ($)
+//               </label>
+//               <span className="absolute right-4 top-5 text-gray-400">$</span>
+//             </div>
+
+//             <div className="relative">
+//               <input
+//                 type="text"
+//                 name="Tags"
+//                 placeholder=" "
+//                 className="w-full p-4 pt-6 bg-gray-50 rounded-lg border border-gray-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-100 peer"
+//                 onChange={(e) => setTags(e.target.value)}
+//                 value={tags}
+//               />
+//               <label className="absolute top-2 left-4 text-sm text-gray-500 pointer-events-none transition-all peer-focus:text-purple-600">
+//                 Tags (comma separated)
+//               </label>
+//             </div>
+//           </div>
+
+//           {/* File Upload */}
+//           <div className="relative group">
+//             <input
+//               type="file"
+//               name="postimage"
+//               onChange={handleImageChange}
+//               className="absolute opacity-0 w-full h-full cursor-pointer"
+//               id="image-upload"
+//               accept="image/*"
+//             />
+//             <label
+//               htmlFor="image-upload"
+//               className="block p-8 text-center border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 hover:border-purple-300 group-active:border-purple-400 transition-colors cursor-pointer"
+//             >
+//               <div className="space-y-2">
+//                 <UploadIcon className="w-8 h-8 text-purple-500 mx-auto" />
+//                 <p className="text-gray-600 font-medium">
+//                   Drag & drop or click to upload
+//                 </p>
+//                 <p className="text-sm text-gray-400">PNG, JPG up to 5MB</p>
+//               </div>
+//             </label>
+//           </div>
+//         </div>
+
+//         {/* Image Preview */}
+//         {previewImage && (
+//           <div className="mb-6 relative group">
+//             <img
+//               src={previewImage}
+//               alt="Preview"
+//               className="w-full h-48 object-cover rounded-xl border border-gray-100 shadow-sm transition-transform group-hover:scale-105"
+//             />
+//             <button
+//               type="button"
+//               onClick={() => setPreviewImage("")}
+//               className="absolute top-2 right-2 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-sm hover:shadow-md transition-all"
+//             >
+//               <XIcon className="w-5 h-5 text-gray-600" />
+//             </button>
+//           </div>
+//         )}
+
+//         {/* Form Actions */}
+//         <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+//           <button
+//             type="button"
+//             onClick={() => {
+//               setPreviewImage("");
+//               setProductDescription("");
+//               setProductName("");
+//               setTags("");
+//               setPrice("");
+//               setImage(null);
+//             }}
+//             className="px-5 py-2.5 text-gray-500 hover:text-gray-700 transition-colors flex items-center gap-2"
+//           >
+//             <XIcon className="w-5 h-5" />
+//             Clear Form
+//           </button>
+//           <Button
+//             type="submit"
+//             className="bg-gradient-to-br from-purple-600 to-orange-600 hover:from-purple-700 hover:to-orange-700 text-white px-8 py-2.5 rounded-lg shadow-sm hover:shadow-lg transition-all"
+//           >
+//             Publish Post
+//           </Button>
+//         </div>
+//       </div>
+  
+//     </Form>
+//   );
+// }
+
+// export { CreatePostCard };

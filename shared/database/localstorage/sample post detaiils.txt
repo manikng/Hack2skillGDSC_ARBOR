@@ -1,0 +1,82 @@
+avatarUrl
+"https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+(string)
+
+
+comments
+0
+(number)
+
+
+dbid
+""
+(string)
+
+
+description
+"Just finished creating my own Booboo Hoodie from scratch! Started as a weekend project and turned into my favorite piece of clothing. Made with super soft cotton blend fabric and custom embroidery. Each stitch represents hours of dedication and creativity. Perfect for cozy nights or casual outings!"
+(string)
+
+
+id
+"4UvgyjNNQI3ZvW2yulQW"
+(string)
+
+
+imageUrl
+"http://res.cloudinary.com/dkxicfpye/image/upload/v1742315633/p7kcjkqslwexwzphgoaj.jpg"
+(string)
+
+
+isliked
+true
+(Boolean)
+
+
+likes
+1
+(number)
+
+
+price
+"$45.99"
+(string)
+
+
+productName
+"Booboo Hoodie"
+(string)
+
+
+
+tags
+(array)
+
+
+0
+"#SelfMade"
+(string)
+
+
+1
+"#DIY"
+(string)
+
+
+2
+"#Fashion"
+(string)
+
+
+3
+"#BoobooHoodie"
+(string)
+
+
+Database location: asia-south2
+Genkit for Node.js is generally available
+Genkit for Node.js is generally available
+Generate images using Imagen 3 models
+Click upgrade to learn how to claim a $300 credit free of charge.
+Generate images using Imagen 3 models
+

@@ -1,0 +1,20 @@
+interface MiddleSidebarProps {
+  posts: Post[];
+  onNewPost: (newPost: Post) => void;
+  className?: string;
+}
+
+function MiddleSidebar({ posts, onNewPost, className }: MiddleSidebarProps) {
+  return (
+    <div className={`flex-1 middleside ml-1 mr-2 h-auto ${className}`}>
+      <CreatePostCard onNewPost={onNewPost} />
+      <div className="space-y-6 h-screen overflow-y-auto">
+        {posts.map((post, index) => (
+          <FeedPost key={post.dbid || index} post={post} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default MiddleSidebar;
