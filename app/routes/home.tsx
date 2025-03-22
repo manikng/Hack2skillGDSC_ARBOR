@@ -39,7 +39,7 @@ const User_Avatar_image =
   "https://res.cloudinary.com/dkxicfpye/image/upload/v1742461554/ifwnkigstnfx5vwdu8la.jpg";
 console.log("User Avatar image is : ", User_Avatar_image);
 
-export async function loader() {
+export async function clientLoader() {
   //and when load it using loader then fetch its dbid and post data
 
   const querySnapshotPostData = await getDocs(collection(db, "posts"));

@@ -59,7 +59,7 @@ export function meta() {
   ];
 }
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   console.log("params", params.username);
   const username = params.username;
   // console.log("username",username);
