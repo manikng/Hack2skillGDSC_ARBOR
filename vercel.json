@@ -1,0 +1,13 @@
+{
+    "headers": [
+      {
+        "source": "/(.*)",
+        "headers": [
+          { "key": "Access-Control-Allow-Origin", "value": "*" },
+          { "key": "Service-Worker-Allowed", "value": "/" }
+        ]
+      }
+    ],
+    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  }
+  
