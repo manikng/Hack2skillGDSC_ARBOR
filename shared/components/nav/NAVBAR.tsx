@@ -9,6 +9,8 @@ import {
   CarouselPrevious,
 } from "~/components/ui/carousel"
 
+
+
 function NAVBAR() {
   const location = useLocation();
   const [activeCategory, setActiveCategory] = useState("");
@@ -82,7 +84,7 @@ function NAVBAR() {
 }
 
 // Helper function to format category names with spaces
-function formatCategoryName(name:object) {
+function formatCategoryName(name: string) {
   return name
     .replace(/([A-Z])/g, ' $1') // Add space before capital letters
     .replace(/^./, str => str.toUpperCase()); // Capitalize first letter

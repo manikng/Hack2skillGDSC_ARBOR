@@ -30,7 +30,7 @@ function Header() {
           </div>
           <MobileSearch />
 
-          <div className="rounded-full border px-4 py-2 hover:shadow-md transition">
+          <div className="rounded-full  border px-4 py-2 hover:shadow-md transition">
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <div>
