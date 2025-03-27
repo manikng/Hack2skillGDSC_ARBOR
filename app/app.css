@@ -168,7 +168,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 }
 html,body{
   height: 100%;
@@ -184,7 +184,13 @@ body::after {
   height: 0px;
 }
 
-
+@keyframes shimmer {
+  0% { background-position: -200% 0 }
+  100% { background-position: 200% 0 }
+}
+.animate-shimmer {
+  animation: shimmer 2s infinite linear;
+}
 
 .leftside{
  width: 20%;
@@ -200,7 +206,15 @@ body::after {
 
  
 }
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
 
+.custom-scrollbar {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For IE/Edge */
+}
 /* some animation styling */
 
 /* Add to your CSS */

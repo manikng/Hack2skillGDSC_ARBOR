@@ -61,39 +61,53 @@ export function OpenSidebarSvg() {
 
 export function ClosedSidebarSvg() {
   return (
-    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  className="icon icon-tabler icons-tabler-filled icon-tabler-layout-sidebar-right-expand"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 3a3 3 0 0 1 2.995 2.824l.005 .176v12a3 3 0 0 1 -2.824 2.995l-.176 .005h-12a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-12a3 3 0 0 1 2.824 -2.995l.176 -.005h12zm-3 2h-9a1 1 0 0 0 -.993 .883l-.007 .117v12a1 1 0 0 0 .883 .993l.117 .007h9v-14zm-3.293 4.293a1 1 0 0 1 .083 1.32l-.083 .094l-1.292 1.293l1.292 1.293a1 1 0 0 1 .083 1.32l-.083 .094a1 1 0 0 1 -1.32 .083l-.094 -.083l-2 -2a1 1 0 0 1 -.083 -1.32l.083 -.094l2 -2a1 1 0 0 1 1.414 0z" /></svg>
-  )
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="icon icon-tabler icons-tabler-filled icon-tabler-layout-sidebar-right-expand"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M18 3a3 3 0 0 1 2.995 2.824l.005 .176v12a3 3 0 0 1 -2.824 2.995l-.176 .005h-12a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-12a3 3 0 0 1 2.824 -2.995l.176 -.005h12zm-3 2h-9a1 1 0 0 0 -.993 .883l-.007 .117v12a1 1 0 0 0 .883 .993l.117 .007h9v-14zm-3.293 4.293a1 1 0 0 1 .083 1.32l-.083 .094l-1.292 1.293l1.292 1.293a1 1 0 0 1 .083 1.32l-.083 .094a1 1 0 0 1 -1.32 .083l-.094 -.083l-2 -2a1 1 0 0 1 -.083 -1.32l.083 -.094l2 -2a1 1 0 0 1 1.414 0z" />
+    </svg>
+  );
 }
 
-function LeftSidebar({  username, 
-  className, 
-  isCollapsed, 
-  onToggle }: LeftSidebarProps) {
+function LeftSidebar({
+  username,
+  className,
+  isCollapsed,
+  onToggle,
+}: LeftSidebarProps) {
   const [userName, setUsername] = useState(username);
   const location = useLocation();
   const currentPath = location.pathname.split("/")[1] || "";
 
   return (
-    <nav 
-      className={`h-auto ${className} ${
-        isCollapsed ? 'w-16' : 'w-64'
-      } transition-all duration-300 border-r border-amber-100 bg-gradient-to-b from-white to-amber-50 shadow-[2px_0_15px_rgba(212,175,55,0.1)]`}
+    <nav
+      className={`h-auto  ${className} ${
+        isCollapsed ? "w-16" : "w-64"
+      } transition-all duration-300 border-r border-amber-100 bg-gradient-to-b from-white to-amber-50 shadow-[2px_0_15px_rgba(212,175,55,0.1)]
+        sticky top-0 z-30 h-screen overflow-y-auto
+      `}
     >
       <div className="flex flex-col h-full p-6">
-        <button 
-          onClick={onToggle} 
+        <button
+          onClick={onToggle}
           className="self-end mb-4 hover:scale-110 transition-transform"
           aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
-          {isCollapsed ? <OpenSidebarSvg /> : <ClosedSidebarSvg />  }
+          {isCollapsed ? <OpenSidebarSvg /> : <ClosedSidebarSvg />}
         </button>
 
         {!isCollapsed ? (
-          <>
+          <div className="">
             <div className="flex flex-col items-center mb-8">
               <div className="relative group">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-br from-amber-300 to-purple-500 animate-spin-slow opacity-80 blur-md group-hover:opacity-100 transition-opacity" />
-                <div className="relative h-24 w-24 rounded-full border-2 border-amber-200 overflow-hidden shadow-inner transition-transform duration-300 group-hover:scale-105">
+                <div className="relative   h-24 w-24 rounded-full border-2 border-amber-200 overflow-hidden shadow-inner transition-transform duration-300 group-hover:scale-105">
                   <img
                     src="https://github.com/shadcn.png"
                     alt="User avatar"
@@ -111,7 +125,7 @@ function LeftSidebar({  username,
               )}
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2 sticky top-0  ">
               <h3 className="text-sm uppercase text-gray-500 font-semibold tracking-wider pl-2 mb-3">
                 My Branches
               </h3>
@@ -121,13 +135,13 @@ function LeftSidebar({  username,
                   { name: "NaturaLoop", icon: "🌱" },
                   { name: "Transport & Logistics", icon: "🚚" },
                   { name: "University", icon: <UniversitySvg /> },
-                  { name: "More", icon: "➕" }
+                  { name: "More", icon: "➕" },
                 ].map((branch) => (
                   <Link
                     key={branch.name}
-                    to={`/${branch.name.replace(/ & /g, '')}`}
+                    to={`/${branch.name.replace(/ & /g, "")}`}
                     className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group ${
-                      currentPath === branch.name.replace(/ & /g, '') 
+                      currentPath === branch.name.replace(/ & /g, "")
                         ? "bg-gradient-to-r from-amber-100 to-amber-50 text-amber-900 border border-amber-200 shadow-sm"
                         : "text-gray-700 hover:bg-amber-50 hover:text-amber-800"
                     }`}
@@ -136,14 +150,12 @@ function LeftSidebar({  username,
                       {branch.icon}
                     </span>
                     <span className="font-medium">{branch.name}</span>
-                    {currentPath === branch.name.replace(/ & /g, '') && (
+                    {currentPath === branch.name.replace(/ & /g, "") && (
                       <span className="ml-auto w-1.5 h-1.5 rounded-full bg-amber-500" />
                     )}
                   </Link>
                 ))}
               </nav>
-            </div>
-
             <div className="mt-auto pt-6 border-t border-amber-100">
               <Link
                 to="/settings"
@@ -153,7 +165,9 @@ function LeftSidebar({  username,
                 <span>Account Settings</span>
               </Link>
             </div>
-          </>
+            </div>
+
+          </div>
         ) : (
           <nav className="flex flex-col space-y-4 items-center">
             {[
@@ -161,13 +175,13 @@ function LeftSidebar({  username,
               { name: "NaturaLoop", icon: "🌱" },
               { name: "Transport & Logistics", icon: "🚚" },
               { name: "University", icon: <UniversitySvg /> },
-              { name: "More", icon: "➕" }
+              { name: "More", icon: "➕" },
             ].map((branch) => (
               <Link
                 key={branch.name}
-                to={`/${branch.name.replace(/ & /g, '')}`}
+                to={`/${branch.name.replace(/ & /g, "")}`}
                 className={`p-2 rounded-lg transition-all duration-200 ${
-                  currentPath === branch.name.replace(/ & /g, '') 
+                  currentPath === branch.name.replace(/ & /g, "")
                     ? "bg-gradient-to-r from-amber-100 to-amber-50 text-amber-900 border border-amber-200 shadow-sm"
                     : "text-gray-700 hover:bg-amber-50 hover:text-amber-800"
                 }`}
@@ -184,10 +198,6 @@ function LeftSidebar({  username,
 }
 
 export default LeftSidebar;
-
-
-
-
 
 // import { Link, useParams, useLocation } from "react-router";
 // import React, { useEffect, useState } from "react";

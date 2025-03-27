@@ -86,7 +86,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="h-auto w-full mb-4 overflow-x-hidden">
+    <div className="h-auto  w-full mb-4 ">
       <Header />
       <NAVBAR />
 

@@ -36,10 +36,9 @@ interface FeedPostProps {
   post: Post;
 }
 
+function FeedPost({ post }: FeedPostProps) {
+  console.log("posts in the feedposts", post);
 
- function FeedPost({ post }: FeedPostProps) {
-  console.log("posts in the feedposts",post);
-  
   const [localPost, setLocalPost] = React.useState(post);
   const [showAIDescription, setShowAIDescription] = React.useState(false);
   const [AiDescription, setAiDescription] = React.useState("");
@@ -48,7 +47,7 @@ interface FeedPostProps {
   const [renderComments, setRenderComments] = React.useState(false);
   const [commentValue, setCommentValue] = React.useState("");
   console.log("the avatar: ", localPost.avatarUrl);
-  
+
   const HandleAiDescriptionClick: () => Promise<void> = async () => {
     // Immediately handle hide/cancel action
     if (showAIDescription || generatingAiDescription) {
@@ -110,7 +109,6 @@ interface FeedPostProps {
   };
   console.log("the rendercomment is: ", renderComments);
 
-  
   function handleCommentClick() {
     if (!commentValue.trim()) return; // Don't submit empty comments
 
@@ -148,7 +146,6 @@ interface FeedPostProps {
     });
   }
 
-
   return (
     <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 overflow-hidden group">
       {/* Header with subtle gradient */}
@@ -182,13 +179,26 @@ interface FeedPostProps {
 
       {/* Content with image overlay */}
       <div className="relative px-6 pb-6">
-        <div className="relative mt-4 rounded-xl overflow-hidden shadow-inner">
+        <div
+          className="relative mt-4 max-w-fit mx-auto rounded-2xl overflow-hidden 
+                 shadow-xl"
+        >
+          
           <img
             src={localPost.imageUrl}
             alt="Post content"
-            className="w-full h-80 object-cover transform transition-transform duration-300 group-hover:scale-102"
+            className="w-full max-h-[70vh] rounded-lg object-contain mx-auto"
+            loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+          {/* <div className="aspect-w-16 aspect-h-9  h-max-[70vh]">
+            <img
+              src={localPost.imageUrl}
+              alt="Post content"
+              className="w-full h-full object-contain"
+              loading="lazy"
+            />
+          </div> */}
+          {/* <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" /> */}
           <button
             onClick={HandleAiDescriptionClick}
             className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-sm text-sm font-semibold text-purple-700 hover:bg-white transition-all hover:shadow-md border border-purple-100"
@@ -276,7 +286,7 @@ interface FeedPostProps {
             <span className="text-sm tracking-wide">Share</span>
           </Button>
         </div>
-        
+
         {renderComments && (
           <div className="mt-4 p-4 bg-gradient-to-r from-purple-50 to-amber-50 rounded-lg border border-amber-200 shadow-inner">
             <div className="comment-form relative">
@@ -389,60 +399,59 @@ interface FeedPostProps {
 
 export default FeedPost;
 
-
 // function handleCommentClick() {
-  //   const docRef = doc(db, "posts", localPost.id);
-  //   // Get existing comments or initialize as empty array
-  //   const existingComments = localPost?.userComments || [];
-  //   // Create new flat array with the new comment
-  //   const updatedComments = [...existingComments, commentValue];
+//   const docRef = doc(db, "posts", localPost.id);
+//   // Get existing comments or initialize as empty array
+//   const existingComments = localPost?.userComments || [];
+//   // Create new flat array with the new comment
+//   const updatedComments = [...existingComments, commentValue];
 
-  //   console.log("the user comments are : ", updatedComments);
+//   console.log("the user comments are : ", updatedComments);
 
-  //   setDoc(docRef, {
-  //     ...localPost,
-  //     comments: localPost.comments + 1,
-  //     userComments: updatedComments
-  //   }, {merge:true}).then((res)=>{
-  //     console.log("Document written with ID: ", localPost.id);
-  //     console.log("the response is : ", res);
-  //     // Update local state to reflect changes
-  //     setLocalPost(prev => ({
-  //       ...prev,
-  //       comments: prev.comments + 1,
-  //       userComments: updatedComments
-  //     }));
-  //   }).catch((error)=>{
-  //     console.error("Error adding document: ", error);
-  //   });
-  //   console.log("the comment is : ", commentValue);
-  //   setCommentValue("");
+//   setDoc(docRef, {
+//     ...localPost,
+//     comments: localPost.comments + 1,
+//     userComments: updatedComments
+//   }, {merge:true}).then((res)=>{
+//     console.log("Document written with ID: ", localPost.id);
+//     console.log("the response is : ", res);
+//     // Update local state to reflect changes
+//     setLocalPost(prev => ({
+//       ...prev,
+//       comments: prev.comments + 1,
+//       userComments: updatedComments
+//     }));
+//   }).catch((error)=>{
+//     console.error("Error adding document: ", error);
+//   });
+//   console.log("the comment is : ", commentValue);
+//   setCommentValue("");
 
-  // }
-  // Update your handleCommentClick function
+// }
+// Update your handleCommentClick function
 //-------------
-  // const HandleAiDescriptionClick = async () => {
-  //   if (showAIDescription) {
-  //     setGeneratingAiDescription(true)
-  //     setShowAIDescription((prev)=> !prev);
-  //   } else {
-  //     // const response = await getresponsefromgeminiapi(localPost.productName);
-  //     // console.log("the response is : ", response);
-  //     // setShowAIDescription(true);
-  //     setGeneratingAiDescription(true);
-  //     const curpost = JSON.stringify(localPost);
-  //     console.log("the local post is : ", curpost);
-  //     const response = await getresponsefromgeminiapi(curpost);
-  //     try {
-  //       if(response){
-  //         setAiDescription(response);
-  //         setGeneratingAiDescription(false);
-  //         setShowAIDescription(true);
+// const HandleAiDescriptionClick = async () => {
+//   if (showAIDescription) {
+//     setGeneratingAiDescription(true)
+//     setShowAIDescription((prev)=> !prev);
+//   } else {
+//     // const response = await getresponsefromgeminiapi(localPost.productName);
+//     // console.log("the response is : ", response);
+//     // setShowAIDescription(true);
+//     setGeneratingAiDescription(true);
+//     const curpost = JSON.stringify(localPost);
+//     console.log("the local post is : ", curpost);
+//     const response = await getresponsefromgeminiapi(curpost);
+//     try {
+//       if(response){
+//         setAiDescription(response);
+//         setGeneratingAiDescription(false);
+//         setShowAIDescription(true);
 
-  //     }} catch (error) {
-  //       console.log("error getting response", error);
+//     }} catch (error) {
+//       console.log("error getting response", error);
 
-  //     }
+//     }
 
-  //   }
-  // };
+//   }
+// };
