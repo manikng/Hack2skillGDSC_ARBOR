@@ -17,5 +17,6 @@ export default [
   route("/auth/login", "./../shared/components/auth/Login.tsx"),
   route("/user/:username", "./routes/users.tsx"),
   route("/error", "./../shared/components/Error404.tsx"),
+  route("*", "./../shared/components/Error404.tsx")
 ] satisfies RouteConfig;
 

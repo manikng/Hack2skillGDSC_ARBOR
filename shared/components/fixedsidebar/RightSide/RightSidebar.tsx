@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router";
 import { DrawerDialogDemo } from "./AskAiDrawer/AskAI";
 import StickySearch from "./StickySearch";
@@ -6,7 +5,7 @@ import {
   ClosedSidebarSvg,
   OpenSidebarSvg,
 } from "../Leftsidebar/LeftSidebar copy";
-import { ChevronRightIcon, Hash, HashIcon, Search, SearchIcon, SparkleIcon, StarIcon } from "lucide-react";
+import { HashIcon, Search,  StarIcon } from "lucide-react";
 
 interface RightSidebarProps {
   className?: string;
