@@ -1,4 +1,4 @@
-import { initializeApp, getApps, getApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
 import { createContext, useContext } from "react";
@@ -11,41 +11,31 @@ const firebaseConfig = {
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-export const FirebaseContext = createContext(null);
+export const FirebaseContext = createContext({
+  app: null,
+  database: null,
+});
 
-export const useFirebase = () => useContext(FirebaseContext);
+export const useFirebase = () => {
+  const context = useContext(FirebaseContext);
+  if (!context) {
+    throw new Error("useFirebase must be used within a FirebaseProvider");
+  }
+  return context;
+};
+
+// export const useFirebase = () => useContext(FirebaseContext);
 
 // Safe initialization for both client and server environments
 let app;
 let db;
 let database;
 
-// Check if we're in a browser environment
-if (typeof window !== 'undefined') {
-  // Client-side initialization
-  try {
-    app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-    db = getFirestore(app);
-    database = getDatabase(app);
-  } catch (error) {
-    console.error("Firebase initialization error:", error);
-  }
-} else {
-  // Server-side initialization
-  try {
-    app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-    db = getFirestore(app);
-    database = getDatabase(app);
-  } catch (error) {
-    console.error("Server-side Firebase initialization error:", error);
-    // Initialize with empty objects to prevent null reference errors
-    app = {};
-    db = {};
-    database = {};
-  }
-}
+app =  initializeApp(firebaseConfig);
+db = getFirestore(app);
+database = getDatabase(app);
 
 export { app, db, database };

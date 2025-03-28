@@ -55,21 +55,15 @@ export async function clientLoader() {
 }
 
 export default function Home() {
-  let posts = useLoaderData() as { posts: Post[] };
-  console.log("Data in home is : ", posts);
-
-  // Initialize collapsed state based on current window width
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(
-    window.innerWidth < 768
-  );
-  const [isSidebarCollapsed2, setIsSidebarCollapsed2] = useState(
-    window.innerWidth < 768
-  );
-
-  const toggleSidebar = () => setIsSidebarCollapsed((prev) => !prev);
-  const toggleSidebar2 = () => setIsSidebarCollapsed2((prev) => !prev);
+  // Changed initial state to safe default for SSR
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
+  const [isSidebarCollapsed2, setIsSidebarCollapsed2] = useState(true);
 
   useEffect(() => {
+    // Set state on client only
+    setIsSidebarCollapsed(window.innerWidth < 768);
+    setIsSidebarCollapsed2(window.innerWidth < 768);
+
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setIsSidebarCollapsed(true);
@@ -79,11 +73,15 @@ export default function Home() {
         setIsSidebarCollapsed2(false);
       }
     };
-
     window.addEventListener("resize", handleResize);
-    // Cleanup the event listener on component unmount
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  let posts = useLoaderData() as { posts: Post[] };
+  console.log("Data in home is : ", posts);
+
+  const toggleSidebar = () => setIsSidebarCollapsed((prev) => !prev);
+  const toggleSidebar2 = () => setIsSidebarCollapsed2((prev) => !prev);
 
   return (
     <div className="h-auto  w-full mb-4 ">
