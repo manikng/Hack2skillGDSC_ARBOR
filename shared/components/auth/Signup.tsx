@@ -22,7 +22,7 @@ export function ButtonDemo() {
 const auth = getAuth(app);
 const db = getDatabase(app);
 
-export async function action({ request }: Route.ActionArgs) {
+export async function clientAction({ request }: Route.ClientActionArgs) {
   const formData = await request.formData();
   const username = formData.get("username")?.toString();
   const email = formData.get("email")?.toString();
