@@ -31,13 +31,13 @@ import { db } from "shared/database/firebase";
 import LeftSidebar from "../../shared/components/fixedsidebar/Leftsidebar/LeftSidebar";
 import MiddleSidebar from "../../shared/components/fixedsidebar/Middleside/MiddlwSidebar";
 import RightSidebar from "../../shared/components/fixedsidebar/RightSide/RightSidebar";
-import { CheckCircleIcon, UploadIcon, XIcon } from "lucide-react";
+import {  UploadIcon, XIcon } from "lucide-react";
 import type { Post } from "shared/types/post";
 
 // const User_Avatar_image = ()=> RandomAvatar();
 const User_Avatar_image =
   "https://res.cloudinary.com/dkxicfpye/image/upload/v1742461554/ifwnkigstnfx5vwdu8la.jpg";
-console.log("User Avatar image is : ", User_Avatar_image);
+// console.log("User Avatar image is : ", User_Avatar_image);
 
 export async function clientLoader() {
   //and when load it using loader then fetch its dbid and post data
@@ -59,23 +59,23 @@ export default function Home() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
   const [isSidebarCollapsed2, setIsSidebarCollapsed2] = useState(true);
 
-  useEffect(() => {
-    // Set state on client only
-    setIsSidebarCollapsed(window.innerWidth < 768);
-    setIsSidebarCollapsed2(window.innerWidth < 768);
+  // useEffect(() => {
+  //   // Set state on client only
+  //   setIsSidebarCollapsed(window.innerWidth < 768);
+  //   setIsSidebarCollapsed2(window.innerWidth < 768);
 
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setIsSidebarCollapsed(true);
-        setIsSidebarCollapsed2(true);
-      } else {
-        setIsSidebarCollapsed(false);
-        setIsSidebarCollapsed2(false);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  //   const handleResize = () => {
+  //     if (window.innerWidth < 768) {
+  //       setIsSidebarCollapsed(true);
+  //       setIsSidebarCollapsed2(true);
+  //     } else {
+  //       setIsSidebarCollapsed(false);
+  //       setIsSidebarCollapsed2(false);
+  //     }
+  //   };
+  //   window.addEventListener("resize", handleResize);
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
 
   let posts = useLoaderData() as { posts: Post[] };
   console.log("Data in home is : ", posts);
